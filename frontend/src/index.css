@@ -1,0 +1,34 @@
+:root {
+  --color-bg-primary: #0B1026;   /* Deep Navy */
+  --color-bg-secondary: #1a223f; /* Slightly lighter navy for cards */
+  --color-accent: #D4AF37;       /* Champagne Gold */
+  --color-text-primary: #E2E8F0; /* Off-white */
+  --color-text-secondary: #94a3b8;
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-bg-secondary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}

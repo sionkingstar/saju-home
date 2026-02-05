@@ -1,0 +1,7 @@
+flask
+flask-cors
+python-dotenv
+requests
+korean_lunar_calendar
+skyfield
+gunicorn

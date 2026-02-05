@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사주명가 대운 만세력</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <style>
+        /* ★ [수정됨] 전체 배경을 신비로운 보라색 톤으로 변경 ★ */
+        body {
+            font-family: 'Pretendard', sans-serif;
+
+            /* ★ 핵심 수정: 붉은 톤이 감도는 신비로운 그라데이션 ★ */
+            background: linear-gradient(135deg, #240b36, #c31432);
+            background-attachment: fixed; /* 스크롤 내려도 배경 고정 */
+
+            min-height: 100vh; /* 화면 전체 높이 채우기 */
+            margin: 0;
+            padding: 15px;
+            color: #222;
+            line-height: 1.4;
+            user-select: none;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white; /* 컨텐츠 박스는 흰색으로 대비 */
+            padding: 30px;
+            border-radius: 25px;
+            padding-bottom: 50px;
+            /* 보라색 배경에 어울리는 부드러운 그림자 */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #311B92; /* 제목도 보라색 톤으로 통일 */
+            margin-bottom: 25px;
+            font-weight: 900;
+            font-size: 32px;
+        }
+
+        /* [입력폼] 회색 박스 유지 */
+        .form-group {
+            background-color: #f8f9fa;
+            padding: 30px 20px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 35px;
+            border: 2px solid #e9ecef;
+        }
+        .row-group { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
+        label { font-size: 20px; font-weight: 800; cursor: pointer; color: #333; }
+        input[type="radio"], input[type="checkbox"] { transform: scale(1.5); margin-right: 8px; }
+
+        select, input[type="number"] {
+            padding: 12px 5px;
+            border: 2px solid #bbb;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 800;
+            text-align: center;
+            color: #000;
+            background-color: white;
+        }
+
+
+       /* [버튼 수정] 배경의 붉은색과 보라색 톤을 활용한 일체감 있는 그라데이션 */
+        .submit-btn {
+            /* 배경의 붉은색(#c31432)에서 시작해 깊은 보라색(#240b36)으로 이어지는 그라데이션 */
+            background: linear-gradient(to right, #c31432, #240b36);
+            color: white; /* 글씨는 흰색으로 선명하게 */
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: 900;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            /* 그림자도 어두운 붉은 톤으로 맞춰 입체감 부여 */
+            box-shadow: 0 4px 0 #7b0a24;
+            transition: all 0.3s ease; /* 부드러운 전환 효과 */
+        }
+        .submit-btn:hover {
+            /* 마우스 올리면 색상 순서를 반대로 바꿔서 빛나는 듯한 효과 */
+            background: linear-gradient(to right, #240b36, #c31432);
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #7b0a24;
+        }
+
+        /* ★ 랜딩 페이지 이동 CTA 버튼 스타일 ★ */
+        .landing-btn-container {
+            margin-top: 40px;
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(36,11,54,0.05), rgba(195,20,50,0.05));
+            border-radius: 20px;
+            border: 2px dashed rgba(195,20,50,0.3);
+        }
+
+        .landing-intro {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .landing-btn {
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF6347);
+            color: white;
+            border: none;
+            padding: 25px 50px;
+            border-radius: 50px;
+            font-size: 26px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .landing-btn:before {
+            content: "🔮";
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            animation: sparkle 1.5s infinite;
+        }
+
+        .landing-btn:after {
+            content: "✨";
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            animation: sparkle 1.5s infinite 0.75s;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.5; transform: translateY(-50%) scale(0.8); }
+            50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+        }
+
+        .landing-btn:hover {
+            background: linear-gradient(45deg, #FF6347, #FFA500, #FFD700);
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 12px 35px rgba(255, 99, 71, 0.5);
+        }
+
+        .landing-btn-text {
+            padding: 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .landing-subtitle {
+            font-size: 14px;
+            color: #999;
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        /* ★ 오행 색상 (선명한 원색) ★ */
+        .wood { color: #2e7d32; } /* 초록 */
+        .fire { color: #d32f2f; } /* 빨강 */
+        .earth { color: #ef6c00; } /* 주황 */
+        .metal { color: #546e7a; } /* 회색 */
+        .water { color: #1565c0; } /* 파랑 */
+
+        /* [사주 원국] */
+        .saju-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .pillar-col {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            border-right: 2px solid #ddd;
+            background: white;
+        }
+        .pillar-col:last-child { border-right: none; }
+        .col-header { background: #e9ecef; padding: 12px 0; font-size: 20px; color: #222; font-weight: 900; border-bottom: 2px solid #ddd; }
+        .cell { padding: 10px 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100px; }
+        .cell-border { border-bottom: 2px solid #eee; }
+        .hanja { font-family: 'Pretendard', serif; font-size: 52px; font-weight: 900; line-height: 1.0; margin-bottom: 5px; }
+        .sipseong { font-size: 20px; color: #555; font-weight: 800; margin-top: 5px; }
+        .sinsal-box { background: #fafafa; padding: 10px 5px; min-height: 60px; display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; }
+        .sinsal-tag { background: white; border: 2px solid #ddd; padding: 4px 10px; border-radius: 6px; font-size: 16px; color: #444; font-weight: 800; }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #311B92;
+            margin: 35px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e9ecef;
+        }
+
+        /* [대운 표] */
+        .daeun-scroll { overflow-x: auto; padding-bottom: 10px; }
+        .daeun-table { width: 100%; min-width: 800px; border-collapse: collapse; text-align: center; }
+        .daeun-table th { padding: 10px; border-right: 1px solid #ddd; background: white; }
+        .daeun-age { font-size: 22px; color: #512DA8; font-weight: 900; display: block; margin-bottom: 5px; }
+        .daeun-sipseong { font-size: 16px; color: #666; font-weight: bold; }
+
+        /* [세운 표] */
+        .sewun-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: white; border-radius: 12px; overflow: hidden; }
+        .sewun-table th { background: #f8f9fa; padding: 15px; color: #333; font-weight: 900; border-bottom: 2px solid #ddd; font-size: 19px; }
+        .sewun-table td { padding: 15px 5px; text-align: center; border-bottom: 1px solid #eee; font-size: 19px; font-weight: 600; vertical-align: middle; }
+        .year-row:hover { background-color: #e3f2fd; cursor: pointer; }
+        .month-row { display: none; }
+        .month-inner-table { width: 98%; margin: 10px auto; border: 2px solid #ddd; }
+        .month-inner-table th {
+            background: linear-gradient(to right, #c31432, #240b36); /* 버튼과 같은 색감 */
+            color: #fff;
+            font-size: 17px;
+            padding: 10px;
+            border-bottom: 2px solid #240b36; /* 테두리도 톤에 맞게 */
+        }
+        .month-inner-table td { font-size: 17px; }
+
+        /* 강조색 (빨강) */
+        .highlight { color: #d32f2f; font-weight: 900; }
+        .ganji-small { font-size: 26px; font-weight: 900; font-family: serif; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { padding: 20px; }
+            .hanja { font-size: 40px; }
+            .sipseong { font-size: 16px; }
+            .sinsal-tag { font-size: 13px; }
+            th, td { font-size: 16px; }
+            .landing-btn {
+                padding: 20px 30px;
+                font-size: 20px;
+            }
+            .landing-btn-text { padding: 0 30px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔮 사주명가 대운 만세력</h1>
+
+        <div class="form-group">
+            <div class="row-group">
+                <label><input type="radio" name="calendar" value="solar" checked> 양력</label>
+                <label><input type="radio" name="calendar" value="lunar"> 음력</label>
+                <label><input type="checkbox" id="isLeap"> 윤달</label>
+            </div>
+            <div class="row-group">
+                <label><input type="radio" name="gender" value="F" checked> 여성</label>
+                <label><input type="radio" name="gender" value="M"> 남성</label>
+            </div>
+            <div class="row-group">
+                <input type="number" id="year" placeholder="년" style="width:90px">
+                <select id="month"></select>
+                <select id="day"></select>
+                <select id="hour"></select>
+                <input type="number" id="minute" value="0" style="width:60px">
+            </div>
+            <button class="submit-btn" onclick="getSaju()">내 사주 분석하기</button>
+        </div>
+
+        <div id="result" style="display:none;">
+            <div class="section-title">사주 원국</div>
+            <div class="saju-grid" id="main-grid"></div>
+
+            <div class="section-title" id="daeun-title">🌊 대운의 흐름</div>
+            <div class="daeun-scroll">
+                <table class="daeun-table"><tbody id="daeun-box"></tbody></table>
+            </div>
+
+            <div class="section-title">📅 연도별/월별 운세 (클릭)</div>
+            <table class="sewun-table">
+                <thead><tr><th width="22%">연도</th><th>세운</th><th>십성</th><th width="30%">신살</th></tr></thead>
+                <tbody id="sewun-list"></tbody>
+            </table>
+
+            <!-- ★ 랜딩 페이지 CTA 버튼 추가 ★ -->
+            <div class="landing-btn-container">
+                <p class="landing-intro">이제 당신의 운명을 더 깊이 들여다볼 시간입니다</p>
+                <a href="https://friendly-elf-5733a5.netlify.app/" target="_blank" class="landing-btn">
+                    <span class="landing-btn-text">내 운명의 비밀 완전 해독하기</span>
+                </a>
+                <p class="landing-subtitle">전문가의 1:1 맞춤 상담으로 숨겨진 운명을 밝혀드립니다</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const now = new Date();
+            document.getElementById('year').value = now.getFullYear();
+            const mSel = document.getElementById('month'); const dSel = document.getElementById('day'); const hSel = document.getElementById('hour');
+            for(let i=1; i<=12; i++) mSel.add(new Option(i+"월", i)); mSel.value = now.getMonth()+1;
+            for(let i=1; i<=31; i++) dSel.add(new Option(i+"일", i)); dSel.value = now.getDate();
+            for(let i=0; i<=23; i++) hSel.add(new Option(i+"시", i)); hSel.value = now.getHours();
+        };
+
+        function getColorClass(char) {
+            const map = {
+                '甲':'wood', '乙':'wood', '寅':'wood', '卯':'wood',
+                '丙':'fire', '丁':'fire', '巳':'fire', '午':'fire',
+                '戊':'earth', '己':'earth', '辰':'earth', '戌':'earth', '丑':'earth', '未':'earth',
+                '庚':'metal', '辛':'metal', '申':'metal', '酉':'metal',
+                '壬':'water', '癸':'water', '亥':'water', '子':'water'
+            };
+            return map[char] || '';
+        }
+
+        function toggleMonth(idx) {
+            const row = document.getElementById(`month-row-${idx}`);
+            row.style.display = (row.style.display === "none" || row.style.display === "") ? "table-row" : "none";
+        }
+
+        async function getSaju() {
+            const y = document.getElementById('year').value;
+            let m = document.getElementById('month').value.toString().padStart(2, '0');
+            let d = document.getElementById('day').value.toString().padStart(2, '0');
+            let h = document.getElementById('hour').value.toString().padStart(2, '0');
+            let min = document.getElementById('minute').value.toString().padStart(2, '0');
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const calendar = document.querySelector('input[name="calendar"]:checked').value;
+            const isLeap = document.getElementById('isLeap').checked;
+
+            // ★ 중요: 여기에 [고객용 아이디] 입력 확인!
+            const apiUrl = 'https://sajupearl.pythonanywhere.com/api/analyze';
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ birth: `${y}-${m}-${d} ${h}:${min}`, gender: gender, calendar: calendar, isLeap: isLeap })
+                });
+                const data = await response.json();
+                if(data.error) { alert("오류: " + data.error); return; }
+
+                document.getElementById('result').style.display = 'block';
+
+                const grid = document.getElementById('main-grid');
+                grid.innerHTML = '';
+
+                // ★ [순서 변경 완료] 시주(0) -> 일주(1) -> 월주(2) -> 년주(3)
+                const order = [0, 1, 2, 3];
+                const titles = ['시주 (말년)', '일주 (본인)', '월주 (사회)', '년주 (조상)'];
+
+                order.forEach((idx, i) => {
+                    const colData = data.pillar.data[idx];
+                    const ganji = colData[1];
+                    const sipseongs = colData[2].split('/');
+                    const sinsal = colData[3] === '-' ? '' : colData[3];
+
+                    grid.innerHTML += `
+                        <div class="pillar-col">
+                            <div class="col-header">${titles[i]}</div>
+                            <div class="cell cell-border">
+                                <span class="hanja ${getColorClass(ganji[0])}">${ganji[0]}</span>
+                                <span class="sipseong">${sipseongs[0]||''}</span>
+                            </div>
+                            <div class="cell cell-border">
+                                <span class="hanja ${getColorClass(ganji[1])}">${ganji[1]}</span>
+                                <span class="sipseong">${sipseongs[1]||''}</span>
+                            </div>
+                            <div class="sinsal-box">
+                                ${sinsal.split(',').map(s => s.trim() ? `<span class="sinsal-tag">${s}</span>` : '').join('')}
+                            </div>
+                        </div>`;
+                });
+
+                document.getElementById('daeun-title').innerText = `🌊 대운의 흐름 (${data.daeun.direction})`;
+                const daeunBox = document.getElementById('daeun-box');
+                let daeunHtml = '<tr>';
+                data.daeun.data.forEach(d => {
+                    daeunHtml += `
+                        <th>
+                            <span class="daeun-age">${d.나이}세</span>
+                            <span class="hanja ${getColorClass(d.간지[0])}" style="font-size:36px">${d.간지[0]}</span>
+                            <span class="hanja ${getColorClass(d.간지[1])}" style="font-size:36px">${d.간지[1]}</span>
+                            <br><span class="daeun-sipseong">${d.십성}</span>
+                        </th>`;
+                });
+                daeunHtml += '</tr>';
+                daeunBox.innerHTML = daeunHtml;
+
+                const sewunList = document.getElementById('sewun-list');
+                sewunList.innerHTML = '';
+                data.sewun.data.forEach((year, idx) => {
+                    let row = `
+                        <tr class="year-row" onclick="toggleMonth(${idx})">
+                            <td><span style="font-weight:900; font-size:22px;">${year.연도}년</span><br><span style="font-size:14px; color:#888;">▼ 펼치기</span></td>
+                            <td>
+                                <span class="ganji-small ${getColorClass(year.세운간지[0])}">${year.세운간지[0]}</span>
+                                <span class="ganji-small ${getColorClass(year.세운간지[1])}">${year.세운간지[1]}</span>
+                            </td>
+                            <td>${year.세운십성}</td>
+                            <td class="${year.세운신살!=='-'?'highlight':''}">${year.세운신살}</td>
+                        </tr>
+                        <tr id="month-row-${idx}" class="month-row">
+                            <td colspan="4">
+                                <table class="month-inner-table">
+                                    <thead><tr><th>월</th><th>간지</th><th>십성</th><th>신살</th></tr></thead>
+                                    <tbody>
+                    `;
+                    year.월운.forEach(m => {
+                        row += `<tr>
+                                    <td>${m.월}</td>
+                                    <td>
+                                        <span style="font-weight:bold; font-size:20px;" class="${getColorClass(m.간지[0])}">${m.간지[0]}</span>
+                                        <span style="font-weight:bold; font-size:20px;" class="${getColorClass(m.간지[1])}">${m.간지[1]}</span>
+                                    </td>
+                                    <td>${m.십성}</td>
+                                    <td style="color:${m.신살!=='-'?'#d32f2f':'#333'}">${m.신살}</td>
+                                </tr>`;
+                    });
+                    row += `</tbody></table></td></tr>`;
+                    sewunList.innerHTML += row;
+                });
+
+                // 결과가 나온 후 스크롤을 부드럽게 이동
+                setTimeout(() => {
+                    document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+
+            } catch (e) { alert("서버 연결 실패. 주소를 확인해주세요."); }
+        }
+    </script>
+</body>
+</html>
