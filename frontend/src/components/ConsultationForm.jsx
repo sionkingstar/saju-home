@@ -207,7 +207,7 @@ export default function ConsultationForm({ isOpen, onClose }) {
       // Assuming the backend server is running on localhost:5000 based on standard setup. 
       // If frontend/backend are on different ports, proxy or full URL is needed. 
       // Using /api assumes proxy or same origin.
-      const response = await axios.post('http://localhost:5000/api/submit', formData);
+      const response = await axios.post('https://saju-home.onrender.com/api/submit', formData);
 
       if (response.status === 200) {
         setStatus('success');

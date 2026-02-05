@@ -363,7 +363,7 @@ function AppWithLogic() {
     const fullBirthStr = `${dateStr} ${timeStr}`;
 
     try {
-      const response = await axios.post('http://localhost:5000/api/analyze', {
+      const response = await axios.post('https://saju-home.onrender.com/api/analyze', {
         birth: fullBirthStr,
         gender: formData.gender,
         calendar: formData.calendarType,
